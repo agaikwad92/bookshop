@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" ignored="0" total="4" passed="4">
+  <reporter-output>
+  </reporter-output>
+  <suite name="Surefire suite" duration-ms="62" started-at="2020-04-14T03:31:23Z" finished-at="2020-04-14T03:31:23Z">
+    <groups>
+    </groups>
+    <test name="Surefire test" duration-ms="62" started-at="2020-04-14T03:31:23Z" finished-at="2020-04-14T03:31:23Z">
+      <class name="main.test.Testpractice">
+        <test-method status="PASS" signature="otherTestcase()" name="otherTestcase" duration-ms="10" started-at="2020-04-14T03:31:23Z" finished-at="2020-04-14T03:31:23Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- otherTestcase -->
+        <test-method status="PASS" signature="testcaseThird()" name="testcaseThird" duration-ms="9" started-at="2020-04-14T03:31:23Z" finished-at="2020-04-14T03:31:23Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testcaseThird -->
+        <test-method status="PASS" signature="testcaseSecond()" name="testcaseSecond" duration-ms="9" started-at="2020-04-14T03:31:23Z" finished-at="2020-04-14T03:31:23Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testcaseSecond -->
+        <test-method status="PASS" signature="testcaseFirst()" name="testcaseFirst" duration-ms="9" started-at="2020-04-14T03:31:23Z" finished-at="2020-04-14T03:31:23Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testcaseFirst -->
+      </class> <!-- main.test.Testpractice -->
+    </test> <!-- Surefire test -->
+  </suite> <!-- Surefire suite -->
+</testng-results>
