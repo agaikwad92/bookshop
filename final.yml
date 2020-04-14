@@ -1,0 +1,99 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  labels:
+    name: webapp
+  name: webapp-controller
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: webapp
+    spec:
+      containers:
+      - image: ajay240792/webapp
+        name: webapp
+        ports:
+        - name: webapp
+          containerPort: 8080
+---
+# webapp Service
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    name: webapp
+  name: webapp
+spec:
+  type: NodePort
+  ports:
+    - port: 8080
+      targetPort: 8080
+  selector:
+    name: webapp
+
+---
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: local-storage
+provisioner: kubernetes.io/no-provisioner
+volumeBindingMode: WaitForFirstConsumer
+---
+
+apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
+kind: Deployment
+metadata:
+  name: mysql
+spec:
+  selector:
+    matchLabels:
+      app: mysql8
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: mysql8
+    spec:
+      containers:
+      - image: mysql:8.0
+        name: mysqlimage
+        #PullPolicy: Never
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: a
+        - name: MYSQL_DATABASE
+          value: onlinebookstore
+        - name: MYSQL_USER
+          value: aj
+        - name: MYSQL_PASSWORD
+          value: a
+        args: ["--default-authentication-plugin=mysql_native_password"]
+        ports:
+        - containerPort: 3306
+          name: mysql8
+        volumeMounts:
+        - name: mydir
+          mountPath: /var/local/db_dump.txt
+      volumes:
+      - name: mydir
+        hostPath:
+      # Ensure the file directory is created.
+          path: /home/ubuntu/db_dump.txt
+          type: FileOrCreate
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql8-service
+  labels:
+    app: mysql8
+spec:
+  type: NodePort
+  ports:
+  - port: 3306
+    protocol: TCP
+  selector:
+    app: mysql8
